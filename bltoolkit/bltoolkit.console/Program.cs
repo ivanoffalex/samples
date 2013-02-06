@@ -50,10 +50,10 @@ namespace bltoolkit.console
             new DbManager("PostgreSQL", string.Empty))
             {
                 SqlQuery<Country> q = new SqlQuery<Country>(db);
-                q.Insert(list); //ERROR: 42804: column "System" is of type smallint but expression is of type text
+                q.Insert(list.Take(2)); //ERROR: 42804: column "System" is of type smallint but expression is of type text
                 q.Insert(list.Skip(2).First()); //ERROR: 42601: syntax error at or near ":"
-                // ?????? q.Update(list);
-                // ?????? q.Update(list.Skip(2).First());
+                q.Update(list.Take(2));
+                q.Update(list.Skip(2).First());
             }
         }
     }
